@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package dev.mtomko;
+
+enum TargetType {
+  TypeOne = 0;
+}
+
+message Message {
+  string name = 1;
+  TargetType targetType = 2;
+}
+
+service EmuService {
+  rpc Resolve (Message) returns (Message);
+}
