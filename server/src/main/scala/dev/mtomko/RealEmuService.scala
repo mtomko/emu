@@ -6,7 +6,6 @@ import dev.mtomko.hello._
 
 class RealEmuService[F[_]: Sync] extends EmuService[F] {
 
-  def Resolve(req: Message): F[Message] =
-    Sync[F].delay(println(req)) *> req.pure[F]
+  def Resolve(req: Message): F[Message] = Sync[F].delay(println(s"Received: $req")) *> req.pure[F]
 
 }

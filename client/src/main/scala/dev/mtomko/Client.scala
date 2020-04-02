@@ -12,10 +12,13 @@ object Client extends IOApp {
 
   val serviceClient: Resource[IO, EmuService[IO]] = EmuService.client[IO](channelFor)
 
+  val message: Message = Message("A target", Some(TypeOne))
+
   def run(args: List[String]): IO[ExitCode] =
     for {
-      response   <- serviceClient.use(c => c.Resolve(Message("A target", Some(TypeOne))))
-      _          <- putStrLn(s"$response")
+      _        <- putStrLn(s"Sending $message")
+      response <- serviceClient.use(c => c.Resolve(message))
+      _        <- putStrLn(s"Received $response")
     } yield ExitCode.Success
 
 }
